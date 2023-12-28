@@ -1,20 +1,8 @@
-// Replace your-framework with the name of your framework
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import DoughnutChart, {
   IDoughnutChartProps,
 } from "../components/DoughnutChart/DoughnutChart";
-
-const meta: Meta<typeof DoughnutChart> = {
-  title: "DoughnutChart",
-  component: DoughnutChart,
-  parameters: {
-    layout: "centered",
-  },
-} satisfies Meta<typeof DoughnutChart>;
-
-export default meta;
-type Story = StoryObj<typeof DoughnutChart>;
 
 const chartData: IDoughnutChartProps<number> = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -43,15 +31,35 @@ const chartData: IDoughnutChartProps<number> = {
   ],
 };
 
-export const Example: Story = {
-  args: {
-    data: chartData,
+const meta: Meta<typeof DoughnutChart> = {
+  title: "DoughnutChart",
+  tags: ['autodocs'],
+  component: DoughnutChart,
+  parameters: {
+    layout: "centered",
   },
-  render: () => {
-    return (
-      <>
-        <DoughnutChart data={chartData} />
-      </>
-    );
+};
+
+export default meta;
+type Story = StoryObj<typeof DoughnutChart>;
+
+
+export const Example: Story = (args) => {
+  return (
+    <>
+      <DoughnutChart {...args} />
+    </>
+  );
+};
+
+Example.args = {
+  data: chartData,
+};
+
+Example.argTypes = {
+  data: {
+    controls: {
+      controls: "object",
+    },
   },
-} satisfies Story;
+};
